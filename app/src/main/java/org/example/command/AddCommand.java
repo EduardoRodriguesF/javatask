@@ -1,19 +1,21 @@
 package org.example.command;
 
+import org.example.task.storage.Storage;
+
 public class AddCommand extends Command {
 	public AddCommand(String[] args) {
 		super(args);
 	}
 
 	@Override
-	public byte exec() {
+	public byte exec(Storage storage) {
         if (this.args.length < 1) {
             return 1;
         }
 
         String item = this.args[0];
         
-        // Create item
+        storage.create(item);
         System.out.println("Task added successfully (ID: 1)");
 
         return 0;

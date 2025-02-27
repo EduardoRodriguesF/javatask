@@ -6,6 +6,7 @@ public class CommandFactory {
     public static Command getCommand(String[] args) {
         if (args.length == 0) {
             // TODO: Error
+            throw new Error("No arguments");
         }
 
         String cmd = args[0];
@@ -18,6 +19,6 @@ public class CommandFactory {
     }
 
     private static Command parseAdd(String[] args) {
-
+        return new AddCommand(args);
     }
 }

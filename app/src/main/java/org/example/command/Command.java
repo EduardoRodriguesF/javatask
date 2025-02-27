@@ -1,5 +1,7 @@
 package org.example.command;
 
+import org.example.task.storage.Storage;
+
 public abstract class Command {
     protected final String[] args;
 
@@ -7,5 +9,5 @@ public abstract class Command {
         this.args = args;
     }
 
-    public abstract byte exec();
+    public abstract byte exec(Storage storage);
 }
