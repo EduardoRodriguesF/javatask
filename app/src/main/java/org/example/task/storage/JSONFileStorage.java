@@ -51,6 +51,11 @@ public class JSONFileStorage extends Storage {
     }
 
     @Override
+    public Task get(String id) {
+        return this.tasks.get(id);
+    }
+
+    @Override
     public Task create(String title) {
         var task = new Task(this.newId(), title);
         tasks.put(task.getId(), task);

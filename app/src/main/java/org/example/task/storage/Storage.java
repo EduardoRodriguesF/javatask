@@ -12,6 +12,8 @@ public abstract class Storage {
 
     public abstract void update(Task task);
 
+    public abstract Task get(String id);
+
     public abstract List<Task> list();
 
     public abstract List<Task> listBy(Status status);

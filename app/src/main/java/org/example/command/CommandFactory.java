@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class CommandFactory {
     public static Command getCommand(String[] args) {
         if (args.length == 0) {
-            // TODO: Error
             throw new Error("No arguments");
         }
 
@@ -15,6 +14,7 @@ public class CommandFactory {
         return switch (cmd) {
             case "add" -> parseAdd(args);
             case "delete" -> parseDelete(args);
+            case "update" -> parseUpdate(args);
             default -> throw new Error("Invalid command");
         };
     }
@@ -25,5 +25,9 @@ public class CommandFactory {
 
     private static Command parseDelete(String[] args) {
         return new DeleteCommand(args);
+    }
+
+    private static Command parseUpdate(String[] args) {
+        return new UpdateCommand(args);
     }
 }
