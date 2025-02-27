@@ -14,11 +14,16 @@ public class CommandFactory {
 
         return switch (cmd) {
             case "add" -> parseAdd(args);
-            default -> parseAdd(args); // TODO: Should error
+            case "delete" -> parseDelete(args);
+            default -> throw new Error("Invalid command");
         };
     }
 
     private static Command parseAdd(String[] args) {
         return new AddCommand(args);
+    }
+
+    private static Command parseDelete(String[] args) {
+        return new DeleteCommand(args);
     }
 }
