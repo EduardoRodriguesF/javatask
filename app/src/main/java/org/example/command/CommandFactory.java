@@ -15,6 +15,7 @@ public class CommandFactory {
             case "add" -> parseAdd(args);
             case "delete" -> parseDelete(args);
             case "update" -> parseUpdate(args);
+            case "list" -> parseList(args);
             default -> throw new Error("Invalid command");
         };
     }
@@ -29,5 +30,9 @@ public class CommandFactory {
 
     private static Command parseUpdate(String[] args) {
         return new UpdateCommand(args);
+    }
+
+    private static Command parseList(String[] args) {
+        return new ListCommand(args);
     }
 }

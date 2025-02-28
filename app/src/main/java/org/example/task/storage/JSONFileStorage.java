@@ -21,7 +21,6 @@ public class JSONFileStorage extends Storage {
         this.path = path;
         this.tasks = new HashMap<String, Task>();
 
-        System.out.println(path);
         if (!Files.exists(path)) {
             Files.createFile(path);
         }
@@ -89,8 +88,9 @@ public class JSONFileStorage extends Storage {
     public List<Task> listBy(Status status) {
         var filtered = new ArrayList<Task>();
 
-        for (var i = 0; i < this.tasks.size(); i++) {
-            Task task = this.tasks.get(String.valueOf(i));
+        var it = tasks.keySet().iterator();
+        while (it.hasNext()) {
+            Task task = this.tasks.get(it.next());
 
             if (task.getStatus() == status) {
                 filtered.add(task);

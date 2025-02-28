@@ -13,7 +13,7 @@ public enum Status {
 
     public static Status fromString(String value) {
         for (Status status : Status.values()) {
-            if (value.equals(value)) {
+            if (status.text.equalsIgnoreCase(value.trim())) {
                 return status;
             }
         }
