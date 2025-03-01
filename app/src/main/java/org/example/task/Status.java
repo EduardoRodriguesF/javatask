@@ -20,4 +20,8 @@ public enum Status {
 
         return null;
     }
+
+    public String getText() {
+        return text;
+    }
 }

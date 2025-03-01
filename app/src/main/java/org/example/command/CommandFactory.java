@@ -2,6 +2,8 @@ package org.example.command;
 
 import java.util.Arrays;
 
+import org.example.task.Status;
+
 public class CommandFactory {
     public static Command getCommand(String[] args) {
         if (args.length == 0) {
@@ -16,6 +18,8 @@ public class CommandFactory {
             case "delete" -> parseDelete(args);
             case "update" -> parseUpdate(args);
             case "list" -> parseList(args);
+            case "mark-in-progress" -> parseMarkStatus(args, Status.IN_PROGRESS);
+            case "mark-done" -> parseMarkStatus(args, Status.DONE);
             default -> throw new Error("Invalid command");
         };
     }
@@ -34,5 +38,9 @@ public class CommandFactory {
 
     private static Command parseList(String[] args) {
         return new ListCommand(args);
+    }
+
+    private static Command parseMarkStatus(String[] args, Status status) {
+        return new MarkStatusCommand(args, status);
     }
 }

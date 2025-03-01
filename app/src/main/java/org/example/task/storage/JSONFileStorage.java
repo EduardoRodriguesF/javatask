@@ -114,10 +114,28 @@ public class JSONFileStorage extends Storage {
 
     private void saveFile() {
         try {
-            var map = new JSONObject(this.tasks);
+            var map = tasksAsObject();
             Files.write(this.path, map.toString().getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private JSONObject tasksAsObject() {
+        var map = new JSONObject();
+
+        var it = this.tasks.values().iterator();
+        while (it.hasNext()) {
+            var task = it.next();
+            var obj = new JSONObject();
+
+            obj.put("id", task.getId());
+            obj.put("title", task.getTitle());
+            obj.put("status", task.getStatus().getText());
+
+            map.put(task.getId(), obj);
+        }
+
+        return map;
     }
 }
