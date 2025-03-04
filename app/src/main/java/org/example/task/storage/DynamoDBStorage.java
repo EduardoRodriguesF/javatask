@@ -105,7 +105,9 @@ public class DynamoDBStorage extends Storage {
         ScanFilter filter = new ScanFilter("status");
         filter = filter.eq(status.getText());
 
-        this.table.scan(filter).forEach((Item item) -> {
+        Index index = this.table.getIndex("status-index");
+        
+        index.scan(filter).forEach((Item item) -> {
             String id = item.getString("id");
             String title = item.getString("title");
             String statusStr = item.getString("status");
