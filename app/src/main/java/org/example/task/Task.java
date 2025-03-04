@@ -10,6 +10,12 @@ public class Task {
         this.title = title;
     }
 
+    public Task(String id, String title, String status) {
+        this.id = id;
+        this.title = title;
+        this.status = Status.fromString(status);
+    }
+
     public Status getStatus() {
         return this.status;
     }

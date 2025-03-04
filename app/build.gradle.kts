@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+
+    eclipse
 }
 
 repositories {
@@ -26,6 +28,7 @@ dependencies {
 
     implementation("org.json:json:20250107")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.5.2")
+    implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.782")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

@@ -1,5 +1,6 @@
 package org.example.command;
 
+import org.example.task.TaskUpdate;
 import org.example.task.storage.Storage;
 
 public class UpdateCommand extends Command {
@@ -16,10 +17,9 @@ public class UpdateCommand extends Command {
         var id = this.args[0];
         var title = this.args[1];
 
-        var task = storage.get(id);
-        task.setTitle(title);
+        var update = new TaskUpdate(id).withTitle(title);
 
-        storage.update(task);
+        storage.update(update);
 
         return 0;
     }

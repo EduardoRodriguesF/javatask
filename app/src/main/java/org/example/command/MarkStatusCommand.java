@@ -1,6 +1,7 @@
 package org.example.command;
 
 import org.example.task.Status;
+import org.example.task.TaskUpdate;
 import org.example.task.storage.Storage;
 
 public class MarkStatusCommand extends Command {
@@ -19,10 +20,8 @@ public class MarkStatusCommand extends Command {
 
         String id = this.args[0];
         
-        var task = storage.get(id);
-        task.setStatus(this.status);
-
-        storage.update(task);
+        var update = new TaskUpdate(id).withStatus(this.status);
+        storage.update(update);
 
         return 0;
     }

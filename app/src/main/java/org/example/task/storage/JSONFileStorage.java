@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.example.task.Status;
 import org.example.task.Task;
+import org.example.task.TaskUpdate;
 import org.json.*;
 
 public class JSONFileStorage extends Storage {
@@ -72,8 +73,12 @@ public class JSONFileStorage extends Storage {
     }
 
     @Override
-    public void update(Task task) {
-        // TODO check if it is already updated when pulled for updating.
+    public void update(TaskUpdate taskUpdate) {
+        var task = this.tasks.get(taskUpdate.id);
+
+        if (taskUpdate.title != null) task.setTitle(taskUpdate.title);
+        if (taskUpdate.status != null) task.setStatus(taskUpdate.status);
+
         this.tasks.put(task.getId(), task);
 
         this.saveFile();

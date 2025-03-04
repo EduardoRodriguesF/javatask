@@ -3,6 +3,7 @@ package org.example.task.storage;
 import java.util.List;
 
 import org.example.task.Task;
+import org.example.task.TaskUpdate;
 import org.example.task.Status;
 
 public abstract class Storage {
@@ -10,7 +11,7 @@ public abstract class Storage {
 
     public abstract void delete(String id) throws Error;
 
-    public abstract void update(Task task) throws Error;
+    public abstract void update(TaskUpdate task) throws Error;
 
     public abstract Task get(String id) throws Error;
 

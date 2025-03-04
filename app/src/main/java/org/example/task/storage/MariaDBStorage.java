@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.example.task.Status;
 import org.example.task.Task;
+import org.example.task.TaskUpdate;
 
 import java.sql.*;
 import java.sql.Connection;
@@ -53,13 +54,35 @@ public class MariaDBStorage extends Storage {
     }
 
     @Override
-    public void update(Task task) throws Error {
-        try (PreparedStatement statement = this.conn.prepareStatement(
-                "UPDATE tasks SET title = ?, status = ? WHERE id = ?")) {
+    public void update(TaskUpdate task) throws Error {
+        var builder = new StringBuilder("UPDATE tasks SET");
 
-            statement.setString(1, task.getTitle());
-            statement.setString(2, task.getStatus().getText());
-            statement.setInt(3, Integer.parseInt(task.getId()));
+        if (task.title != null) {
+            builder.append(" title = ?");
+
+            if (task.status != null) {
+                builder.append(',');
+            }
+        }
+
+        if (task.status != null) {
+            builder.append(" status = ?");
+        }
+
+        builder.append(" WHERE id = ?");
+
+
+        try (PreparedStatement statement = this.conn.prepareStatement(builder.toString())) {
+
+            var i = 0;
+
+            if (task.title != null)
+                statement.setString(++i, task.title);
+
+            if (task.status != null)
+                statement.setString(++i, task.status.getText());
+
+            statement.setInt(++i, Integer.parseInt(task.id));
 
             statement.executeQuery();
         } catch (SQLException e) {
