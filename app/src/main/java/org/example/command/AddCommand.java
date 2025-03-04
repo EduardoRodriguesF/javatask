@@ -8,7 +8,7 @@ public class AddCommand extends Command {
 	}
 
 	@Override
-	public byte exec(Storage storage) {
+	public byte exec(Storage storage) throws Error {
         if (this.args.length < 1) {
             return 1;
         }

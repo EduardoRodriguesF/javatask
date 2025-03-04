@@ -9,5 +9,5 @@ public abstract class Command {
         this.args = args;
     }
 
-    public abstract byte exec(Storage storage);
+    public abstract byte exec(Storage storage) throws Error;
 }

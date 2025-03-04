@@ -8,7 +8,7 @@ public class UpdateCommand extends Command {
 	}
 
     @Override
-    public byte exec(Storage storage) {
+    public byte exec(Storage storage) throws Error {
         if (this.args.length < 2) {
             throw new Error("Invalid arguments");
         }

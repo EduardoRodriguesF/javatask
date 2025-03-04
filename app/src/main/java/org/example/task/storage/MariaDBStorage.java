@@ -19,7 +19,7 @@ public class MariaDBStorage extends Storage {
     }
 
     @Override
-    public Task create(String title) {
+    public Task create(String title) throws Error {
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "INSERT INTO tasks (title, status) VALUES (?, ?) RETURNING id")) {
 
@@ -31,29 +31,29 @@ public class MariaDBStorage extends Storage {
                     int id = result.getInt("id");
                     return new Task(String.valueOf(id), title);
                 }
+            } catch (SQLException e) {
+                throw new Error(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
 
         return null;
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(String id) throws Error {
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "DELETE FROM tasks WHERE id = ?")) {
             statement.setInt(1, Integer.parseInt(id));
             statement.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
     }
 
     @Override
-    public void update(Task task) {
+    public void update(Task task) throws Error {
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "UPDATE tasks SET title = ?, status = ? WHERE id = ?")) {
 
@@ -63,13 +63,12 @@ public class MariaDBStorage extends Storage {
 
             statement.executeQuery();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
     }
 
     @Override
-    public Task get(String id) {
+    public Task get(String id) throws Error {
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "SELECT * FROM tasks WHERE id = ?")) {
 
@@ -80,19 +79,17 @@ public class MariaDBStorage extends Storage {
                     return taskFromResult(result);
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
+                throw new Error(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
 
         return null;
     }
 
     @Override
-    public List<Task> list() {
+    public List<Task> list() throws Error {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         try (PreparedStatement statement = this.conn.prepareStatement(
@@ -102,19 +99,17 @@ public class MariaDBStorage extends Storage {
                     tasks.add(taskFromResult(result));
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
+                throw new Error(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
 
         return tasks;
     }
 
     @Override
-    public List<Task> listBy(Status status) {
+    public List<Task> listBy(Status status) throws Error {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         try (PreparedStatement statement = this.conn.prepareStatement(
@@ -126,12 +121,10 @@ public class MariaDBStorage extends Storage {
                     tasks.add(taskFromResult(result));
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
+                throw new Error(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            throw new Error(e.getMessage());
         }
 
         return tasks;

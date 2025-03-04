@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public byte exec(Storage storage) {
+    public byte exec(Storage storage) throws Error {
         List<Task> tasks;
         Status status;
 

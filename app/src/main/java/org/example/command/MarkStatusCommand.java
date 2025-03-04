@@ -12,7 +12,7 @@ public class MarkStatusCommand extends Command {
     }
 
     @Override
-    public byte exec(Storage storage) {
+    public byte exec(Storage storage) throws Error {
         if (this.args.length < 1 || this.args[0] == null) {
             return 1;
         }
