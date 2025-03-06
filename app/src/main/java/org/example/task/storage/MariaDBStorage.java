@@ -1,6 +1,6 @@
 package org.example.task.storage;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.example.task.Status;
@@ -113,7 +113,7 @@ public class MariaDBStorage extends Storage {
 
     @Override
     public List<Task> list() throws Error {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new LinkedList<Task>();
 
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "SELECT * FROM tasks")) {
@@ -133,7 +133,7 @@ public class MariaDBStorage extends Storage {
 
     @Override
     public List<Task> listBy(Status status) throws Error {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new LinkedList<Task>();
 
         try (PreparedStatement statement = this.conn.prepareStatement(
                 "SELECT * FROM tasks WHERE status = ?")) {

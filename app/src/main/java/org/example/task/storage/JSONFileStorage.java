@@ -3,8 +3,8 @@ package org.example.task.storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -86,12 +86,12 @@ public class JSONFileStorage extends Storage {
 
     @Override
     public List<Task> list() {
-        return new ArrayList<Task>(this.tasks.values());
+        return new LinkedList<Task>(this.tasks.values());
     }
 
     @Override
     public List<Task> listBy(Status status) {
-        var filtered = new ArrayList<Task>();
+        var filtered = new LinkedList<Task>();
 
         var it = tasks.keySet().iterator();
         while (it.hasNext()) {

@@ -1,6 +1,6 @@
 package org.example.task.storage;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.example.task.Status;
@@ -84,7 +84,7 @@ public class DynamoDBStorage extends Storage {
 
     @Override
     public List<Task> list() throws Error {
-        ArrayList<Task> list = new ArrayList<Task>();
+        List<Task> list = new LinkedList<Task>();
 
         this.table.scan().forEach((Item item) -> {
             String id = item.getString("id");
@@ -100,7 +100,7 @@ public class DynamoDBStorage extends Storage {
 
     @Override
     public List<Task> listBy(Status status) throws Error {
-        ArrayList<Task> list = new ArrayList<Task>();
+        List<Task> list = new LinkedList<Task>();
 
         ScanFilter filter = new ScanFilter("status");
         filter = filter.eq(status.getText());
